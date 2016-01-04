@@ -9,18 +9,18 @@ Getting NASA data into a PostGIS database, and querying it.
 2. Make a database in pgsql that has postgis functionality enabled:
  [install](http://postgis.net/install/)
 
-  $ createdb gisdb
-  $ pgcli gisdb -- opens gisdb in repl
-  gisdb> -- Enable PostGIS (includes raster)
+ $ createdb gisdb
+ $ pgcli gisdb -- opens gisdb in repl
+ gisdb> -- Enable PostGIS (includes raster)
         CREATE EXTENSION postgis;
         -- Enable Topology
         CREATE EXTENSION postgis_topology;
         -- Enable PostGIS Advanced 3D
         -- and other geoprocessing algorithms
         -- for some reason the other CREATE EXTENSION commands don't work, but I don't seem to need them?
-  gisdb> -- make sure to create a schema in the database into which you
+ gisdb> -- make sure to create a schema in the database into which you
         -- will load the raster:
-  gisdb> CREATE SCHEMA gisdb
+ gisdb> CREATE SCHEMA gisdb
 
 3. The GeoTIFF is a raster which contains all of the info I need. Convert this to a .sql file using raster2sql:
 
