@@ -24,3 +24,10 @@ psql -d nasa -f rainfall_all.sql
 
 ##Querying the database
 
+nasa> select * from rainfall.rasters limit 3;
+
+nasa> select st_nearestvalue(rast, ST_GEOMFromtext('POINT(-81.233 42.983)',4326)) from rainfall.rasters;
+--this returns a range of values
+
+nasa>select st_nearestvalue(rast, ST_GEOMFromtext('POINT(0 51)',4326)), forecast_date from rainfall.rasters;
+--this returns a column of all 255
