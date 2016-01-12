@@ -9,12 +9,11 @@ def get_file_paths():
     return subprocess.check_output(["ls", "scraped_tiffs/"]).split('\n')
 
 
-
-# 2009-01-01.tiff: TIFF image data, big-endian
-# 2001-12-08.tiff: data
+# correct files look like this --> 2009-01-01.tiff: TIFF image data, big-endian
+# corrupted files look like thi --> 2001-12-08.tiff: data
 
 if __name__ == '__main__':
-    #run this file from /GeoDB
+    #make sure to run this file from /GeoDB directory
     print("filtering dates")
     dates = filter(is_data, get_file_paths())
     print("dates filtered")

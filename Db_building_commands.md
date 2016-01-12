@@ -34,3 +34,24 @@ nasa> select st_nearestvalue(rast, ST_GEOMFromtext('POINT(-81.233 42.983)',4326)
 
 nasa>select st_nearestvalue(rast, ST_GEOMFromtext('POINT(0 51)',4326)), forecast_date from rainfall.rasters;
 --this returns a column of all 255
+
+
+--------------------------------------------
+
+##
+
+>>>%run app/__init__.py
+
+>>>day1 = Nasa.query.filter_by(rid=1).first()
+
+>>>
+
+--------------------------------------------
+
+>>> import psycopg2
+>>> conn = psycopg2.connect("dbname = 'nasa'")
+>>> cur = conn.cursor()
+>>> cur.execute("""SELECT rid FROM rainfall.rasters where rid=1""")
+>>> rows = cur.fetchall()
+
+
