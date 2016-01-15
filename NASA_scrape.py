@@ -18,15 +18,16 @@ if __name__ == '__main__':
     import time
     import random
     import urllib
+    import sys
 
     path_to_chromedriver ='/Users/Lin/Downloads/chromedriver'
-
     browser = webdriver.Chrome(executable_path = path_to_chromedriver)
-    geotiff_xpath = '//*[@id="content"]/div/div[2]/div[1]/div/div[2]/div[2]/form/table/tbody/tr[1]/td/select/option[3]'
+    geotiff_xpath = '//*[@id="content"]/div/div[2]/div[1]/div/div[2]/div[2]/form/table/tbody/tr[1]/td/select/option[8]'
     download_url = '//*[@id="content"]/div/div[2]/div[1]/div/div[2]/div[2]/form/table/tbody/tr[5]/td/a'
 
-    import sys
-    if sys.argv:
+
+    if sys.argv!=['NASA_scrape.py']:
+        print('checking sys.argv')
         dates = sys.argv[2:]
     else:
         dates = []
@@ -36,7 +37,6 @@ if __name__ == '__main__':
                 for day in range(1,days+1):
                     dates.append("{}-{}-{}".format(year,"{0:0=2d}".format(month),"{0:0=2d}".format(day)))
         #putting the dates in a list means I can resume from a certain date if any problems
-
     for date in dates:
         url = 'http://neo.sci.gsfc.nasa.gov/view.php?datasetId=TRMM_3B43D&date={}'.format(date)
         browser.get(url)
@@ -45,7 +45,7 @@ if __name__ == '__main__':
             browser.find_element_by_xpath(geotiff_xpath).click()
             download_element = browser.find_element_by_xpath(download_url)
             download_link = download_element.get_attribute('href')
-            urllib.urlretrieve(download_link, "scraped_tiffs/{}.tiff".format(date))
+            urllib.urlretrieve(download_link, "scraped_floating_geotiffs/{}.tiff".format(date))
         except Exception:
             print(date + 'unsuccessful')
         time.sleep(1)
