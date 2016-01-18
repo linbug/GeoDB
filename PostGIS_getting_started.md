@@ -39,6 +39,10 @@ http://gis.stackexchange.com/questions/62026/how-to-import-geotiff-via-postgis-i
 $ psql -d gisdb -f nasa.sql
 
     This means something like open a pgsql repl with the database gisdb loaded, and load in the file nasa.sql.
+
+BATCH LOADING
+
+
 4. Query the database
 
 gisdb> select st_nearestvalue(rast, ST_GEOMFromtext('POINT(13 26)',4326)) from gisdb.nasa;
@@ -52,5 +56,6 @@ I think there's also a way to convert all of the 'nulls' at once
 [blog guide to quickstart make postgis db](http://live.osgeo.org/en/quickstart/postgis_quickstart.html#creating-a-spatial-table-the-easy-way)
 
 [ST_nearest value docs](http://postgis.net/docs/manual-2.1/RT_ST_NearestValue.html)
+
 
 

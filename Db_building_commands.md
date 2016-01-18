@@ -1,6 +1,6 @@
 
 ##Make the database and enable postgis functionality
-makedb nasa
+createdb nasa
 
 pgcli nasa
 
@@ -13,7 +13,7 @@ CREATE EXTENSION postgis_topology;
 ##Converting all the files into the sql rasters
 http://postgis.net/docs/manual-2.2/using_raster_dataman.html
 
-raster2pgsql -c -C -s 4326 -n forecast_date *.tiff rainfall.rasters > rainfall_all.sql
+raster2pgsql -c -C -s 4326 -n forecast_date *.tiff rainfall.rasters > rainfall_all_Jan18.sql
 
 -c                  *--Create new table and populate it with raster(s), this is the default mode.*
 
@@ -22,6 +22,9 @@ raster2pgsql -c -C -s 4326 -n forecast_date *.tiff rainfall.rasters > rainfall_a
 -s 4326             *--Assign output raster with specified SRID. NASA rainfall data is WGS8*
 
 -n forecast_date    *--Assign the forecast date to a new column called 'forecast_date'*
+
+
+file *.tiff | grep -v TIFF | cut -c 1-8  <!-- finds files that are not in the correct format -->
 
 psql -d nasa -f rainfall_all.sql
 
