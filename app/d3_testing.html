@@ -14,15 +14,26 @@
   color: white;
 }
 
+.chart rect {
+  fill: steelblue;
+}
+
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
 </style>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
 </head>
 <body>
-    <div class="chart"></div>
-
+<!--     <div class="chart"></div>
+ -->
+    <svg class="chart"></svg>
     <script>
-        var data = {'2015-12-21': 0.00999999977648258, '2015-12-09': 0.00999999977648258, '2015-12-22': 0.00999999977648258, '2015-12-20': 0.00999999977648258, '2015-12-14': 0.00999999977648258, '2015-12-15': 0.00999999977648258, '2015-12-16': 0.00999999977648258, '2015-12-17': 0.00999999977648258, '2015-12-10': 0.00999999977648258, '2015-12-11': 0.00999999977648258, '2015-12-12': 0.00999999977648258, '2015-12-13': 0.00999999977648258, '2015-12-18': 0.00999999977648258, '2015-12-19': 0.00999999977648258}
+        var data = {'2015-05-29': 0.674, '2015-05-28': 4.509, '2015-05-27': 0.01, '2015-05-26': 0.01, '2015-06-20': 0.491, '2015-06-24': 45.363, '2015-06-25': 0.01, '2015-06-11': 0.409, '2015-06-10': 0.01, '2015-06-13': 0.428, '2015-06-12': 0.01, '2015-06-15': 2.867, '2015-06-14': 0.01, '2015-06-17': 0.01, '2015-06-16': 1.059, '2015-06-19': 0.272, '2015-06-18': 20.083, '2015-06-21': 33.043, '2015-06-22': 0.674, '2015-05-30': 0.01, '2015-05-31': 0.01, '2015-06-23': 0.01, '2015-06-02': 12.206, '2015-06-03': 1.743, '2015-06-26': 0.272, '2015-06-01': 36.175, '2015-06-06': 0.01, '2015-06-07': 0.01, '2015-06-04': 0.01, '2015-06-05': 0.101, '2015-06-08': 0.01, '2015-06-09': 1.39}
 
         var rainfall = []
         var dates = Object.keys(data)
@@ -31,13 +42,37 @@
             rainfall.push(data[o])
         }
 
-        // var data = [1,2,3,4,5];
-        d3.select(".chart")
-            .selectAll("div")
-            .data(rainfall)
-            .enter().append("div")
-            .style("width", function(d) { return d * 1000 + "px"; })
-            .text(function(d) { return d; });
+        var width = 420
+            barHeight = 20;
+
+        var x = d3.scale.linear()
+                .domain([0, 100])
+                .range([0, width]);
+
+        var chart = d3.select(".chart")
+                    .attr("width", width)
+                    .attr("height", barHeight * rainfall.length);
+
+        var bar = chart.selectAll("g")
+                    .data(rainfall)
+                    .enter().append("g")
+                    .attr("transform", function(d,i){ return "translate(0," + i * barHeight + ")"; });
+
+        bar.append("rect")
+            .attr("width", x)
+            .attr("height", barHeight - 1);
+
+        bar.append("text")
+            .attr("x", function(d){ return x(d) - 3;})
+            .attr("y", barHeight / 2)
+            .attr("dy", ".35em")
+            .text(function(d) {return d;});
+        // d3.select(".chart")
+        //     .selectAll("div")
+        //     .data(rainfall)
+        //     .enter().append("div")
+        //     .style("width", function(d) { return d * 1000 + "px"; })
+        //     .text(function(d) { return d; });
         // var margin = {top: 20, right: 80, bottom: 30, left: 50},
         //     width = 640 - margin.left - margin.right,
         //     height = 380 - margin.top - margin.bottom;
