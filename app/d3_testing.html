@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+<style>
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
+</style>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+</head>
+<body>
+    <div class="chart"></div>
+
+    <script>
+        var data = {'2015-12-21': 0.00999999977648258, '2015-12-09': 0.00999999977648258, '2015-12-22': 0.00999999977648258, '2015-12-20': 0.00999999977648258, '2015-12-14': 0.00999999977648258, '2015-12-15': 0.00999999977648258, '2015-12-16': 0.00999999977648258, '2015-12-17': 0.00999999977648258, '2015-12-10': 0.00999999977648258, '2015-12-11': 0.00999999977648258, '2015-12-12': 0.00999999977648258, '2015-12-13': 0.00999999977648258, '2015-12-18': 0.00999999977648258, '2015-12-19': 0.00999999977648258}
+
+        var rainfall = []
+        var dates = Object.keys(data)
+
+        for(var o in data){
+            rainfall.push(data[o])
+        }
+
+        // var data = [1,2,3,4,5];
+        d3.select(".chart")
+            .selectAll("div")
+            .data(rainfall)
+            .enter().append("div")
+            .style("width", function(d) { return d * 1000 + "px"; })
+            .text(function(d) { return d; });
+        // var margin = {top: 20, right: 80, bottom: 30, left: 50},
+        //     width = 640 - margin.left - margin.right,
+        //     height = 380 - margin.top - margin.bottom;
+
+        // var canvas = d3.select("body")                                          //Make the canvas and set attribute
+        //                 .append("svg")
+        //                 .attr("width", width + 50)
+        //                 .attr("height", height + 50)
+        //                 .append("g")
+
+        // var x = d3.scale.linear()
+        //             .domain([0, d3.max(data, function(d) { return d.values.length - 1; })])
+        //             .range([0, width]);
+
+        // var y = d3.scale.linear()
+        //         .domain([d3.min(data, function(d) { return d3.min(d.values); }),
+        //      d3.max(data, function(d) { return d3.max(d.values); })])
+        //     .range([height, 0]);
+    </script>
+
+
+
+
+
+</body>
+</html>
+
+
+
+
