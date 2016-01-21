@@ -42,8 +42,8 @@ div.tooltip {
     font: 12px sans-serif;
     background: lightsteelblue;
     border: 0px;
-    border-radius: 8px;
-    pointer-events: none;
+/*    border-radius: 8px;
+*/    pointer-events: none;
 }
 
 </style>
@@ -72,11 +72,11 @@ div.tooltip {
             dates.push(parseDate(p));
         }
 
-
+        var dateFormat = d3.time.format("%e %B %Y");
 
         var margin = {top: 20, right: 30, bottom: 70, left: 40},
             width = 500 - margin.left - margin.right,
-            height = 250 - margin.top - margin.bottom;
+            height = 300 - margin.top - margin.bottom;
             // barWidth = width/rainfall.length;
 
         var x = d3.scale.ordinal()
@@ -91,6 +91,7 @@ div.tooltip {
         var xAxis = d3.svg.axis()
                     .scale(x)
                     .tickValues(x.domain().filter(function(d, i) { return !(i % 7); }))
+                    .tickFormat(dateFormat)
                     .orient("bottom")
 
         var yAxis = d3.svg.axis()
@@ -108,17 +109,17 @@ div.tooltip {
                     .append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        var dateFormat = d3.time.format("%e %B %Y");
+
 
             chart.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis)
             .selectAll("text") //rotates x axis lables
-            .attr("y", 0)
-            .attr("x", 9)
+            .attr("y", 9)
+            .attr("x", 6)
             .attr("dy", ".35em")
-            .attr("transform", "rotate(90)")
+            .attr("transform", "rotate(45)")
             .style("text-anchor", "start");
 
             chart.append("g")
@@ -145,8 +146,8 @@ div.tooltip {
                     div.transition()
                         .style("opacity",1);
                     div.html(dateFormat(d) +  "<br>" + d3.select(this).attr("rainfall") + "mm")
-                        .style("left", d3.select(this).attr("x") +"px")
-                        .style("top", height - d3.select(this).attr("height") - (height/20) + "px")
+                        .style("left", width/2  +"px")
+                        .style("top", height + margin.top + margin.bottom + 20 + "px")
                 });
 
     </script>
