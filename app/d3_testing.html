@@ -22,20 +22,23 @@
 
     fill:darkblue;
 }
-.axis text {
+text {
   font: 10px sans-serif;
+  color: #061235;
 }
 
 .axis path,
 .axis line {
   fill: none;
-  stroke: #000;
+  stroke: #061235;
   shape-rendering: crispEdges;
 }
 
-.x.axis path{
+/*.x.axis path{
     display:none;
 }
+
+.y.axis*/
 
 div.tooltip {
     position: absolute;
@@ -50,6 +53,16 @@ div.tooltip {
 */    pointer-events: none;
 }
 
+.total_rainfall{
+
+    /*fill:red;*/
+}
+
+.rainfall_bar{
+
+    fill:purple;
+}
+
 </style>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
@@ -58,6 +71,8 @@ div.tooltip {
 <!--     <div class="chart"></div>
  -->
     <svg class="chart"></svg>
+    <svg class="total_rainfall"></svg>
+    <p class="rainfall_message"></p>
     <script>
         var data = {"2015-02-04": 0.01, "2015-02-05": 0.01, "2015-02-06": 0.01, "2015-02-07": 0.145, "2015-02-08": 0.01, "2015-02-09": 0.01, "2015-02-10": 0.491, "2015-02-11": 0.01, "2015-02-12": 0.01, "2015-02-13": 0.01, "2015-02-14": 0.145, "2015-02-15": 1.454, "2015-02-16": 0.01, "2015-02-17": 13.981, "2015-02-18": 0.01, "2015-02-19": 0.01, "2015-02-20": 0.01, "2015-02-21": 3.436, "2015-02-22": 8.498, "2015-02-23": 4.509, "2015-02-24": 0.01, "2015-02-25": 0.01, "2015-02-26": 13.981, "2015-02-27": 0.01, "2015-02-28": 0.01, "2015-03-01": 13.363, "2015-03-02": 13.363, "2015-03-03": 6.776, "2015-03-04": 6.19, "2015-03-05": 6.776, "2015-03-06": 1.39, "2015-03-07": 0.01, "2015-03-08": 0.01, "2015-03-09": 0.01, "2015-03-10": 0.428, "2015-03-11": 12.206, "2015-03-12": 0.01, "2015-03-13": 0.01, "2015-03-14": 3.762, "2015-03-15": 0.615, "2015-03-16": 0.01, "2015-03-17": 1.012, "2015-03-18": 0.01, "2015-03-19": 0.01, "2015-03-20": 0.737, "2015-03-21": 0.238, "2015-03-22": 0.01, "2015-03-23": 0.01, "2015-03-24": 0.01, "2015-03-25": 0.01, "2015-03-26": 4.509}
 
@@ -113,52 +128,97 @@ div.tooltip {
                     .append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+        chart.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+        .selectAll("text") //rotates x axis lables
+        .attr("y", 9)
+        .attr("x", 6)
+        .attr("dy", ".35em")
+        .attr("transform", "rotate(45)")
+        .style("text-anchor", "start");
 
+        chart.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
 
-            chart.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis)
-            .selectAll("text") //rotates x axis lables
-            .attr("y", 9)
-            .attr("x", 6)
-            .attr("dy", ".35em")
-            .attr("transform", "rotate(45)")
-            .style("text-anchor", "start");
+        chart.selectAll(".bar")
+            .data(rainfall)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("y", function(d){ return height })
+            .attr("rainfall", function(d){return d})
+            .attr("height", 0)
+            .attr("width", x.rangeBand())
+            .transition()
+            .attr("y", function(d){return y(d)})
+            .attr("height",function(d){return height - y(d);})
+            .duration(500)
 
-            chart.append("g")
-            .attr("class", "y axis")
-            .call(yAxis);
+        chart.selectAll("rect")
+            .data(dates)
+            .attr("x", function(d){return x(d)})
+            .on("mouseover", function(d){
+                div.transition()
+                    .style("opacity",1);
+                div.html(dateFormat(d) +  "<br>" + d3.select(this).attr("rainfall") + "mm")
+                    .style("left", width/2  +"px")
+                    .style("top", 20 + "px")
+            })
+            .on("mouseout", function(d){
 
-            chart.selectAll(".bar")
-                .data(rainfall)
-                .enter().append("rect")
-                .attr("class", "bar")
-                // .attr("x", 20)
-                .attr("y", function(d){ return y(d);})
-                .attr("rainfall", function(d){return d})
-                .attr("height", function(d){return height - y(d);})
-                .attr("width", x.rangeBand())
+                div.transition()
+                    .style("opacity", 0)
+            });
 
+        var chart2 = d3.select(".total_rainfall")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-                // .attr("transform", function(d,i){ return "translate(" + i * barWidth + ",0)"; });
+        var total_x = d3.scale.linear()
+                    .domain([0, 50*rainfall.length])
+                    .range([0, width]);
 
-            chart.selectAll("rect")
-                .data(dates)
-                .attr("x", function(d){return x(d)})
-                .on("mouseover", function(d){
-                    div.transition()
-                        .style("opacity",1);
-                    div.html(dateFormat(d) +  "<br>" + d3.select(this).attr("rainfall") + "mm")
-                        .style("left", width/2  +"px")
-                        .style("top", 20 + "px")
+        var total_xAxis = d3.svg.axis()
+        .scale(total_x)
+        .orient("top");
+
+        chart2.append("g")
+                .attr("class", "x axis")
+                .call(total_xAxis)
+        var total_rainfall = d3.sum(rainfall);
+        var rainfall_bar = chart2.append("rect")
+                                    .attr("width", 0)
+                                    .attr("height", 50)
+                                    .attr("class", "rainfall_bar")
+                                    .attr("transform", "translate(0,5)")
+                                    .transition()
+                                    .attr("width", total_x(total_rainfall))
+                                    .duration(5000)
+        chart2.append("text")
+                .text(0)
+                .attr("class", "text")
+                .attr("x", 5)
+                .attr("y", d3.select(".rainfall_bar").attr("height")/2 + 5)
+                .transition()
+                .duration(5000)
+                .attr("x", total_x(total_rainfall)+ 5)
+                .tween("text", function(){
+
+                    var i = d3.interpolateRound(0,total_rainfall);
+                    return function(t){
+
+                        this.textContent = "Total rainfall: " + i(t) + " mm"
+                    }
                 })
-                .on("mouseout", function(d){
 
-                    div.transition()
-                        .style("opacity", 0)
-                        // .duration(500)
-                });
+        // var rainfall_message = d3.select(".rainfall_message")
+        //                         .html(0)
+        //                         .transition()
+        //                         .html(d3.select(".rainfall_bar").attr("width"))
 
     </script>
 
