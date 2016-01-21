@@ -18,6 +18,10 @@
   fill: steelblue;
 }
 
+.bar:hover{
+
+    fill:darkblue;
+}
 .axis text {
   font: 10px sans-serif;
 }
@@ -74,7 +78,7 @@ div.tooltip {
 
         var dateFormat = d3.time.format("%e %B %Y");
 
-        var margin = {top: 20, right: 30, bottom: 70, left: 40},
+        var margin = {top: 70, right: 30, bottom: 70, left: 40},
             width = 500 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
             // barWidth = width/rainfall.length;
@@ -147,7 +151,13 @@ div.tooltip {
                         .style("opacity",1);
                     div.html(dateFormat(d) +  "<br>" + d3.select(this).attr("rainfall") + "mm")
                         .style("left", width/2  +"px")
-                        .style("top", height + margin.top + margin.bottom + 20 + "px")
+                        .style("top", 20 + "px")
+                })
+                .on("mouseout", function(d){
+
+                    div.transition()
+                        .style("opacity", 0)
+                        // .duration(500)
                 });
 
     </script>
