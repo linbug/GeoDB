@@ -68,7 +68,8 @@
 
         var x = d3.scale.ordinal()
                 .domain(dates)
-                .rangeRoundBands([0,width], 0.1) //calculates spacing of x axis; adds padding between bars
+                .rangeRoundBands([0,width], 0.1)
+                 //calculates spacing of x axis; adds padding between bars
 
         var y = d3.scale.linear()
                 .domain([0, d3.max(rainfall)])
@@ -76,7 +77,8 @@
 
         var xAxis = d3.svg.axis()
                     .scale(x)
-                    .orient("bottom").ticks(5);
+                    .tickValues(x.domain().filter(function(d, i) { return !(i % 7); }))
+                    .orient("bottom")
 
         var yAxis = d3.svg.axis()
                     .scale(y)
