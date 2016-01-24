@@ -14,7 +14,7 @@ def return_json(start_date, end_date, latitude, longitude):
     rows = cur.fetchall()
     json_dict = {}
     for row in rows:
-        json_dict[row[0][:-5]] = (row[1])
+        json_dict[row[0][:-5]] = round(row[1],3)
     return json_dict
 
 @app.route('/index')
@@ -23,7 +23,6 @@ def index():
     return render_template('index.html')
 
 @app.route('/result', methods=['POST', 'GET'])
-# @app.route('/new_query', methods = ['POST'])
 def query():
     if request.method == 'POST':
         try:
@@ -34,29 +33,14 @@ def query():
             json_dict = return_json(start_date, end_date, latitude, longitude)
         except ValueError:
             return redirect(url_for('index'))
-        return render_template('result.html', start_date = start_date, end_date = end_date, latitude = latitude, longitude = longitude, json_dict = json_dict)
-        # return 'Start date = {} \n End date = {} \n Location = {}'.format(start_date, end_date, latitude)
+        return render_template('result.html', start_date = start_date, end_date = end_date, latitude = latitude, longitude = longitude, json_dict = json.dumps(json_dict, sort_keys=True))
     return redirect(url_for('index')) #redirects to index if GET request
-
-
-
-
-
-    # return redirect(url_for('result'))
-
-# @app.route('/result')
-# def result():
-#     if not json_dict:
-#         return redirect(url_for('index'))
-
-    # return render_template('result.html', latitude = latitude, longitude = longitude, json_dict = json_dict)
 
 @app.route('/start_date=<start_date>&end_date=<end_date>&latitude=<latitude>&longitude=<longitude>')
 def return_json_page(start_date, end_date, latitude, longitude):
     json_dict = return_json(start_date, end_date, latitude, longitude)
     return json.dumps(json_dict, sort_keys=True)
-    return 'Start date = {} \n End date = {} \n Location = {}'.format(start_date, end_date, latitude)
-
+    # return 'Start date = {} \n End date = {} \n Location = {}'.format(start_date, end_date, latitude)
 
 @app.errorhandler(404)
 def not_found(error):
