@@ -4,13 +4,15 @@ import json
 import psycopg2.extensions
 
 app = Flask(__name__)
-conn = psycopg2.connect("dbname = 'nasaJan18'")
+conn = psycopg2.connect("dbname = 'nasatiled'")
 cur = conn.cursor()
 
 def return_json(start_date, end_date, latitude, longitude):
     cur.execute("""SELECT forecast_date, ST_nearestvalue(rast,ST_geomfromtext('Point(%s %s)',4326)) FROM rainfall.rasters \
                 WHERE forecast_date >= %s \
-                AND forecast_date <= %s;""", (float(longitude), float(latitude), start_date, end_date))
+                AND forecast_date <= %s
+                AND ST_intersects(rast, ST_geomfromtext('Point(%s %s)',4326));"""
+           , (float(longitude), float(latitude), start_date, end_date,float(longitude), float(latitude) ))
     rows = cur.fetchall()
     json_dict = {}
     for row in rows:

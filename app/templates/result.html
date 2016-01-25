@@ -1,54 +1,50 @@
 <!DOCTYPE html>
-{%include 'header.html' %}
+{%include 'head.html' %}
 
 <body>
+<script>var latitude = {{latitude}}; var longitude = {{longitude}}; var data = {{json_dict|tojson}};</script>
 
-<h1> Rainfall at latitude = {{latitude}}, longitude = {{longitude}} between {{start_date}} and {{end_date}} </h1>
-<div id="map"></div>
+  <nav>
 
-<div id="chart"></div>
+      <a class = nav_link href= '/'> NEW QUERY </a>
+      <a class = nav_link href = '/about'> ABOUT </a>
 
-<script>
-var map = L.map('map').setView([{{latitude}}, {{longitude}}], 5);
+    </nav>
 
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibGluYnVnIiwiYSI6ImNpamRmZGkycDAwODR1Nmpic2U0c3UwMWgifQ.f5AsfaIZ7zIztXD2J8_a-g', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
-    id: 'linbug.ommeomk5',
-    accessToken: 'pk.eyJ1IjoibGluYnVnIiwiYSI6ImNpamRmZGkycDAwODR1Nmpic2U0c3UwMWgifQ.f5AsfaIZ7zIztXD2J8_a-g'
-}).addTo(map);
+  <div class=container>
+    <div class=content>
 
-var marker = L.marker([{{latitude}}, {{longitude}}]).addTo(map);
+       <div class="result_text">
 
-</script>
-{{json_dict}}
+          <h2> Rainfall at latitude = {{latitude}}, longitude = {{longitude}} between {{start_date}} and {{end_date}} </h2>
 
+       </div>
 
-<script>
+     <div id="map"></div>
 
-// var data = {{json_dict|tojson}};
-
-// console.log(d3.max(data));
-
-// var height = 500;
-
-// var barWidth = 10;
-
-// var width = data.length * (barWidth + 10);
-
-// var svg = d3.select("body")                                          //Make the canvas and set attribute
-//                 .append("svg")
-//                 .attr("width", width )
-//                 .attr("height", height )
-//                 .append("g")
+    <div>
+      <svg class="chart"></svg>
+    </div>
+    <div>
+      <svg class="total_rainfall"></svg>
+    </div>
 
 
 
-// d3.json({{json_dict}}, function(json)){
+    </div>
+  </div>
 
-//             console.log(json)
-//         }
 
-</script>
+  <footer>
+    <p>
+    Some footer
+    </p>
+  </footer>
+
+<script src="/static/leaflet.js"></script>
+<script src="/static/d3_viz.js"></script>
 
 </body>
+</html>
+
+
