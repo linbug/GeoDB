@@ -57,6 +57,9 @@
                     .append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+        var result_text = d3.select("#result_text")
+                            .html("Rainfall at " + ((latitude>=0)?(latitude + "° N") : (Math.abs(latitude))+ "° S") + ", "+((longitude>=0)?(longitude + "° W") : (Math.abs(longitude))+ "° E") + '<br>' + dateFormat(dates[0]) + ' to ' + dateFormat(dates[1]))
+
         chart.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(" + offset + "," + height + ")")
@@ -95,7 +98,7 @@
             .attr("x", function(d){return x(d) + offset})
 
             .on("mouseover", function(d){
-                tooltip.html(dateFormat(d) +  "<br>" + d3.select(this).attr("rainfall") + "mm")
+                tooltip.html(dateFormat(d) +  ": " + d3.select(this).attr("rainfall") + "mm")
                 // .attr("x", width/2  +"px")
                 tooltip.transition()
                     .style("opacity",1)

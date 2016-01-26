@@ -1,6 +1,5 @@
 html{
 height: 100vh;
-  /*min-height:100%;*/
 }
 
 body {
@@ -9,20 +8,45 @@ body {
   display:flex;
   flex-direction: column;
   margin:0;
+  font-family: 'Work Sans', sans-serif;
+  background-color:#EFE2CF;
+  color: #263B4A;
 }
 
 h2{
   text-align: center;
+  font-size: 30px;
+  font-weight: 400;
+  margin:10px;
+  line-height: 1.5em;
+}
 
+#result_text{
+    background-color: #AABDD4;
+    margin:0;
+
+}
+
+.result_text{
+    margin: 10px 0 50px 0;
+    width:100%;
 }
 
 h1{
   text-align: center;
+  font-size: 70px;
+  font-weight: 400;
+  margin: 10px;
+
+}
+
+p{
+    /*font-family: 'Work Sans', sans-serif;*/
 }
 
 nav{
   height:3em;
-  background-color: orange;
+/*  background-color: #504463;*/
   display: -webkit-flex;
    display: flex;
    -webkit-flex-direction: row;
@@ -30,7 +54,19 @@ nav{
    -webkit-justify-content: flex-end;
    justify-content: flex-end;
   align-items: center;
+     border-width: 2px;
+   border-bottom: 1px #6D84A7 solid;
 }
+
+a{
+    text-decoration: None;
+    color: #263B4A;
+    text-decoration: none;
+}
+
+a:hover{
+    color:#AABDD4;
+    }
 
 .nav_link{
   margin: 1.5em;
@@ -40,7 +76,7 @@ nav{
 .container{
 flex:1;
 padding: 0 15% 0 15%;
- background-color: skyblue;
+ /*background-color: skyblue;*/
 display: -webkit-flex;
    display: flex;
    -webkit-flex-direction: column;
@@ -55,7 +91,6 @@ display: -webkit-flex;
 .content{
     flex:1;
 /*    height:auto;*/
-  background-color:white;
   display: -webkit-flex;
    display: flex;
    -webkit-flex-direction: column;
@@ -69,14 +104,35 @@ display: -webkit-flex;
 }
 .entry_box{
   margin: 20px;
-  background-color: red;
-  padding: 1em;
+  background-color: #AABDD4;
+  border-radius: 5px;
+  padding: 2em;
   justify-content: center;
+  width:400px;
+  display:flex;
 }
 
 .form_input{
   display: flex;
+justify-content: center;
+align-items:center;
+width: 250px;
 
+}
+
+button {
+    background-color: #3f5672;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+}
+
+button:hover {
+    background-color: #28405d;
 
 }
 
@@ -91,6 +147,7 @@ input{
 
 .input_form{
   flex:1;
+  /*text-align: center;*/
 
 }
 
@@ -107,7 +164,7 @@ input{
 }
 
 footer{
-  background-color: gold;
+  background-color: #6D84A7;
   margin: 0px;
   display: flex;
 justify-content: center;
@@ -129,7 +186,7 @@ svg{
 }
 
 .bar {
-  fill: steelblue;
+  fill: #4B6482;
 }
 
 .bar:hover{
@@ -137,14 +194,14 @@ svg{
     fill:darkblue;
 }
 text {
-  font: 10px sans-serif;
-  color: #061235;
+  font-size: 12px;
+  color: #263B4A;
 }
 
 .axis path,
 .axis line {
   fill: none;
-  stroke: #061235;
+  stroke: #263B4A;
   shape-rendering: crispEdges;
 }
 
@@ -154,15 +211,18 @@ div.tooltip {
     width: 500px;
     height: 28px;
     padding: 2px;
-    font: 10px sans-serif;
-    background: lightsteelblue;
+    font: 10px;
+    background: #EFE2CF;
     border: 0px;
     pointer-events: none;
     top: 20px;
 
 
 }
+.chart{
 
+    background-color: #EFE2CF;
+}
 
 .rainfall_bar{
 

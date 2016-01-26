@@ -102,6 +102,7 @@ div.tooltip {
         // Define the div for the tooltip
         var tooltip = d3.select("body").append("div")
                     .attr("class", "tooltip")
+                    .attr("y",-50)
                     .style("opacity", 0);
 
         var chart = d3.select(".chart")
@@ -149,7 +150,7 @@ div.tooltip {
 
             .on("mouseover", function(d){
                 tooltip.html(dateFormat(d) +  "<br>" + d3.select(this).attr("rainfall") + "mm")
-                .style("left", width/2  +"px")
+                // .style("left", width/2  +"px")
                 tooltip.transition()
                     .style("opacity",1)
             })
@@ -196,18 +197,6 @@ div.tooltip {
                                     .transition()
                                     .attr("width", total_x(total_rainfall))
                                     .duration(5000)
-
-        // var rainfall_bar = chart2.selectAll(".bar")
-        //                         .data(rainfall_stats)
-        //                         .enter().append("rect")
-        //                         .attr("width",0)
-        //                         .attr("height", 25)
-        //                         .attr("class", "rainfall_bar")
-        //                         .attr("y", function(d){return total_y(rainfall_stats.indexOf(d))})
-        //                         .transition()
-        //                         .attr("width", function(d){return total_x(d)})
-        //                         .duration(5000)
-
 
         chart2.append("text")
                 .text(0)
