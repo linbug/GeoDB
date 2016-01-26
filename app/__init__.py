@@ -44,9 +44,13 @@ def return_json_page(start_date, end_date, latitude, longitude):
     return json.dumps(json_dict, sort_keys=True)
     # return 'Start date = {} \n End date = {} \n Location = {}'.format(start_date, end_date, latitude)
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.errorhandler(404)
 def not_found(error):
-    return "Page not found"
+    return "Oops! Page not found"
 
 if __name__ == '__main__':
     app.run(debug=True)
