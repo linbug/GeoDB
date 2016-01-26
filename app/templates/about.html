@@ -16,7 +16,19 @@
     <div class=content>
 
        <div class="about_para">
-        <p> This app provides API access to the TRMM data. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium et lectus a sollicitudin. Suspendisse ornare sapien eget lorem luctus, a imperdiet dolor ultrices. Phasellus tempor id est vel consequat. Mauris sed maximus ante. Sed non aliquet leo. Aenean venenatis, lacus ac viverra sagittis, est libero tincidunt quam, nec porta est lacus vitae libero. Vestibulum vitae vestibulum libero, eu ornare dolor. Sed massa neque, dignissim ut libero ac, lacinia commodo est. Donec lacinia posuere enim, sit amet consequat lacus sodales ac. Sed sodales, purus nec lobortis finibus, mauris turpis venenatis massa, vitae sollicitudin nisl dolor porta erat. Nunc consectetur nunc in vulputate pharetra. Ut eleifend enim ipsum, sit amet condimentum ligula pharetra id. Cras sit amet interdum orci, et consequat est. </p>
+        <h2 class = about_header> About </h2>
+        <p class= about_text> This app provides API access to historical <a href = 'http://pmm.nasa.gov/trmm'> Tropical Rainfall Monitoring Mission (TRMM) </a> precipitation data. The TRMM was a joint mission between NASA and the Japan Aerospace Exploration (JAXA) Agency to study rainfall for weather and climate research. The TRMM ran from Nov 1997 to April 2015, collecting over 17 years of daily rainfall data. This database was populated with daily rainfall measurements in floating point Geotiff format at 0.25° resolution, from the <a href='http://neo.sci.gsfc.nasa.gov/view.php?datasetId=TRMM_3B43D'>NASA Earth Observations (NEO)</a> site.    </p>
+        <h2 class = about_header> Usage </h2>
+        <p class= about_text>
+        Any global location within -50° and 50° latitude, and -180° and -180° can be queried, between 1 Jan 1998 and 30 Sept 2015. Data will be returned for the nearest point to the one queried. Please note: these data have been scaled and resampled for visualisation purposes by NEO, and are not suitable for rigorous scientific investigations. For more information, see <a href=http://neo.sci.gsfc.nasa.gov/blog/2013/12/23/csv-and-floating-point-geotiffs/> here</a>.</p>
+        <h2 class = about_header> API </h2>
+
+        <p class= about_text>API access to the database is also available; simply enter an URL of the form:</p>
+
+        <p class=api_url> /start_date=<b><i>yyyy-mm-dd</i></b>&end_date=<b><i>yyyy-mm-dd</i></b>&latitude=<b><i>latitude</i></b>&longitude=<b><i>longitude</i></b>  </p>
+        <p> You will be returned a JSON file. For example, the following returns the data for Manhattan between 1 Jan 1998 and 5 March 1999: </p>
+        <p class=api_url> /start_date=1998-01-01&end_date=1999-03-05&latitude=40&longitude=-73 </p>
+        <p>If you enter a location outside of the bounds of the dataset, you will be returned either -3.40282346638529e+38 or 99999.0, which are null values, or an empty JSON. </p>
         </div>
 
     </div>

@@ -114,9 +114,9 @@
 
         var chart2 = d3.select(".total_rainfall")
                 .attr("width", width + margin.left + margin.right)
-                .attr("height", height/3 + margin.top/2 + margin.bottom/2)
+                .attr("height", height/3 )
                 .append("g")
-                .attr("transform", "translate(" + (margin.left + offset) +  "," + margin.top/2 + ")")
+                .attr("transform", "translate(" + (margin.left ) +  "," + margin.top/2 + ")")
 
         var rainfall_stats = [d3.sum(rainfall), d3.max(rainfall), d3.mean(rainfall)]
 

@@ -21,6 +21,17 @@ h2{
   line-height: 1.5em;
 }
 
+.about_header{
+
+    text-align: left;
+    margin:1em 0 0.3em;
+}
+
+.about_text{
+
+    margin :0;
+}
+
 #result_text{
     background-color: #AABDD4;
     margin:0;
@@ -31,7 +42,13 @@ h2{
     margin: 10px 0 50px 0;
     width:100%;
 }
+/*
+.api_url{
 
+    background-color:#B3Bcc7;
+
+}
+*/
 h1{
   text-align: center;
   font-size: 70px;
@@ -176,7 +193,8 @@ justify-content: center;
 /*******leaflet*********/
 
 #map { height: 20em;
-        width: 500px; }
+        width: 500px;
+        margin:0; }
 
 /*********d3************/
 
