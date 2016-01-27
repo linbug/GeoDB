@@ -15,7 +15,7 @@
             dates.push(parseDate(p));
         };
 
-        var margin = {top: 50, right: 30, bottom: 70, left: 40},
+        var margin = {top: 10, right: 30, bottom: 70, left: 40},
             width = 500 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
 
@@ -43,13 +43,8 @@
                     .orient("left");
 
         // Define the div for the tooltip
-        var tooltip = d3.select("#tooltip_div").append("div")
-                    .attr("class", "tooltip")
-                    // .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                    // .style("left", d3.select(".axis").attr("x") + "px")
-
-                    // .style("left", 20)
-                    .style("opacity", 0);
+        var tooltip = d3.select("#tooltip_div")
+                    ;
 
         var chart = d3.select(".chart")
                     .attr("width", width + margin.left + margin.right)
@@ -116,7 +111,7 @@
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height/3 )
                 .append("g")
-                .attr("transform", "translate(" + (margin.left ) +  "," + margin.top/2 + ")")
+                .attr("transform", "translate(" + (margin.left ) +  "," + (margin.top + 15) + ")")
 
         var rainfall_stats = [d3.sum(rainfall), d3.max(rainfall), d3.mean(rainfall)]
 

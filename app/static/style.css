@@ -9,13 +9,15 @@ body {
   flex-direction: column;
   margin:0;
   font-family: 'Work Sans', sans-serif;
-  background-color:#EFE2CF;
-  color: #263B4A;
+/*  background-color:#EFE2CF;
+*/
+background-color:#ECE8E0;
+color: #263B4A;
 }
 
 h2{
   text-align: center;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 400;
   margin:10px;
   line-height: 1.5em;
@@ -33,25 +35,28 @@ h2{
 }
 
 #result_text{
-    background-color: #AABDD4;
-    margin:0;
+/*    background-color: #AABDD4;
+*/    margin:0;
+    font-size:35px;
+
 
 }
 
 .result_text{
-    margin: 10px 0 50px 0;
+    margin: 15px 0 ;
     width:100%;
 }
-/*
+
 .api_url{
 
     background-color:#B3Bcc7;
+    text-align: center;
 
 }
-*/
+
 h1{
   text-align: center;
-  font-size: 70px;
+  font-size: 60px;
   font-weight: 400;
   margin: 10px;
 
@@ -116,7 +121,7 @@ display: -webkit-flex;
    align-items: center;
    -webkit-justify-content: center;
    justify-content: center;
-   margin: 5% 0% 5% 0%;
+   margin: 2% 0% 2% 0%;
 
 }
 .entry_box{
@@ -187,14 +192,33 @@ footer{
 justify-content: center;
   align-items: center;
 
-
 }
+
+#footer{
+
+    margin: 0.5em;
+}
+
+#summary_stats{
+    font-size:25px;
+    margin:20px 0 40px;
+}
+
+#instructions_for_rollover{
+ margin:10px ;
+ font-size: 10px;
+ text-align: center;
+}
+
 
 /*******leaflet*********/
 
 #map { height: 20em;
         width: 500px;
-        margin:0; }
+        margin:20px;
+        border-radius: 5px;
+        z-index: 0;
+        }
 
 /*********d3************/
 
@@ -204,12 +228,12 @@ svg{
 }
 
 .bar {
-  fill: #4B6482;
+  fill: #5d6c86;
 }
 
 .bar:hover{
 
-    fill:darkblue;
+    fill:#B3BCC7;
 }
 text {
   font-size: 12px;
@@ -222,6 +246,8 @@ text {
   stroke: #263B4A;
   shape-rendering: crispEdges;
 }
+
+
 
 div.tooltip {
     position: relative;
@@ -239,15 +265,16 @@ div.tooltip {
 }
 .chart{
 
-    background-color: #EFE2CF;
+    /*background-color: #ECE8E0;*/
 }
 
 .rainfall_bar{
 
-    fill:lightblue;
+    fill:#9286a7;
 }
 
 #tooltip_div{
-
+    text-align: center;
     height:28px;
+    margin:10px;
 }
