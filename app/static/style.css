@@ -130,6 +130,8 @@ display: -webkit-flex;
   border-radius: 5px;
   padding: 2em;
   justify-content: center;
+  align-items:center;
+  flex-direction:column;
   width:400px;
   display:flex;
 }
@@ -210,6 +212,11 @@ justify-content: center;
  text-align: center;
 }
 
+
+#warning{
+
+    color:#ae5b59;
+}
 
 /*******leaflet*********/
 

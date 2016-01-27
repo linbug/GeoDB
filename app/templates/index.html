@@ -26,6 +26,15 @@
        </div>
 
        <div class = entry_box>
+        <div>
+               {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <p id= 'warning'>{{ message }}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+              </div>
             <form action="/result" method="post">
               <div class = form_input>
                 <p class= input_text>Start date:</p>
@@ -47,6 +56,7 @@
                 <input type='number' step='any' name = 'longitude' min = -179 max =180 value = -73.95
                 class = input_form>
               </div>
+
               <div class = button_box>
                 <button type="submit" value="Submit">Submit</button>
               </div>
@@ -54,6 +64,7 @@
 
 
         </form>
+
        </div>
 
     </div>

@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 import psycopg2
 import json
 import psycopg2.extensions
 
 app = Flask(__name__)
+app.secret_key = 'some_secret'
 conn = psycopg2.connect("dbname = 'nasatiled'")
 cur = conn.cursor()
 
@@ -35,7 +36,12 @@ def query():
             json_dict = return_json(start_date, end_date, latitude, longitude)
         except ValueError:
             return redirect(url_for('index'))
-        return render_template('result.html', start_date = start_date, end_date = end_date, latitude = latitude, longitude = longitude, json_dict = json.dumps(json_dict, sort_keys=True))
+        if not (end_date or start_date):
+            flash("Please select both start and end dates.")
+        elif end_date<start_date:
+            flash("Please ensure that end date is after start date.")
+        else:
+            return render_template('result.html', start_date = start_date, end_date = end_date, latitude = latitude, longitude = longitude, json_dict = json.dumps(json_dict, sort_keys=True))
     return redirect(url_for('index')) #redirects to index if GET request
 
 @app.route('/start_date=<start_date>&end_date=<end_date>&latitude=<latitude>&longitude=<longitude>')
