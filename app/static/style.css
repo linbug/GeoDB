@@ -81,8 +81,7 @@ nav{
 }
 
 a{
-    text-decoration: None;
-    color: #263B4A;
+    color: #3E618A;
     text-decoration: none;
 }
 
@@ -92,6 +91,7 @@ a:hover{
 
 .nav_link{
   margin: 1.5em;
+  color:#263B4A;
 
 }
 
@@ -196,9 +196,9 @@ justify-content: center;
 
 }
 
-#footer{
-
-    margin: 0.5em;
+#footer_text{
+    font-size: 10px;
+    margin: 1em;
 }
 
 #summary_stats{
@@ -243,7 +243,7 @@ svg{
     fill:#B3BCC7;
 }
 text {
-  font-size: 12px;
+  font-size: 10px;
   color: #263B4A;
 }
 

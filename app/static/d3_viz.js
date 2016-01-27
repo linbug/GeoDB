@@ -15,7 +15,7 @@
             dates.push(parseDate(p));
         };
 
-        var margin = {top: 10, right: 30, bottom: 70, left: 40},
+        var margin = {top: 10, right: 50, bottom: 70, left: 40},
             width = 500 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
 
