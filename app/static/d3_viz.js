@@ -53,7 +53,7 @@
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         var result_text = d3.select("#result_text")
-                            .html("Rainfall at " + ((latitude>=0)?(latitude + "° N") : (Math.abs(latitude))+ "° S") + ", "+((longitude>=0)?(longitude + "° W") : (Math.abs(longitude))+ "° E") + '<br>' + dateFormat(dates[0]) + ' to ' + dateFormat(dates[1]))
+                            .html("Rainfall at " + ((latitude>=0)?(latitude + "° N") : (Math.abs(latitude))+ "° S") + ", "+((longitude>=0)?(longitude + "° W") : (Math.abs(longitude))+ "° E") + '<br>' + dateFormat(dates[0]) + ' to ' + dateFormat(dates[(dates.length-1)]))
 
         chart.append("g")
         .attr("class", "x axis")

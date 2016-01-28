@@ -44,9 +44,21 @@ def query():
             return render_template('result.html', start_date = start_date, end_date = end_date, latitude = latitude, longitude = longitude, json_dict = json.dumps(json_dict, sort_keys=True))
     return redirect(url_for('index')) #redirects to index if GET request
 
-@app.route('/start_date=<start_date>&end_date=<end_date>&latitude=<latitude>&longitude=<longitude>')
-def return_json_page(start_date, end_date, latitude, longitude):
-    json_dict = return_json(start_date, end_date, latitude, longitude)
+# @app.route('/api/start_date=<start_date>&end_date=<end_date>&latitude=<latitude>&longitude=<longitude>')
+#def return_json_page(start_date, end_date, latitude, longitude):
+#    json_dict = return_json(start_date, end_date, latitude, longitude)
+#    return json.dumps(json_dict, sort_keys=True)
+@app.route('/api/rain_dump')
+def return_json_page():
+    start_date = request.args.get('start_date', '')
+    end_date   = request.args.get('end_date', '')
+    latitude   = request.args.get('latitude', '')
+    longitude  = request.args.get('longitude', '')
+
+    if len(start_date) == 0:
+        return "Nope"
+
+    json_dict  = return_json(start_date, end_date, latitude, longitude)
     return json.dumps(json_dict, sort_keys=True)
     # return 'Start date = {} \n End date = {} \n Location = {}'.format(start_date, end_date, latitude)
 

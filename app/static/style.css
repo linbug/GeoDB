@@ -48,7 +48,7 @@ h2{
 }
 
 .api_url{
-
+    padding:5px;
     background-color:#B3Bcc7;
     text-align: center;
 
@@ -121,7 +121,7 @@ display: -webkit-flex;
    align-items: center;
    -webkit-justify-content: center;
    justify-content: center;
-   margin: 2% 0% 2% 0%;
+   margin: 1.5% 0% 1.5% 0%;
 
 }
 .entry_box{
@@ -163,6 +163,10 @@ button:hover {
 input{
   height: 3em;
   width: 12em;
+  border-radius: 4px;
+  background-color: #F4F4F4;
+  color: #263B4A;
+  font-size: 12px;
 }
 
 .input_text{
@@ -171,6 +175,7 @@ input{
 
 .input_form{
   flex:1;
+
   /*text-align: center;*/
 
 }

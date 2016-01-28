@@ -26,9 +26,9 @@
 
         <p class= about_text>API access to the database is also available; simply enter an URL of the form:</p>
 
-        <p class=api_url> /start_date=<b><i>yyyy-mm-dd</i></b>&end_date=<b><i>yyyy-mm-dd</i></b>&latitude=<b><i>latitude</i></b>&longitude=<b><i>longitude</i></b>  </p>
+        <p class=api_url> /api/rain_dump?start_date=<b><i>yyyy-mm-dd</i></b>&end_date=<b><i>yyyy-mm-dd</i></b>&latitude=<b><i>latitude</i></b>&longitude=<b><i>longitude</i></b>  </p>
         <p> You will be returned a JSON file. For example, the following returns the data for Manhattan between 1 Jan 1998 and 5 March 1999: </p>
-        <p class=api_url> /start_date=1998-01-01&end_date=1999-03-05&latitude=40&longitude=-73 </p>
+        <p class=api_url> /api/rain_dump?start_date=1998-01-01&end_date=1999-03-05&latitude=40&longitude=-73 </p>
         <p>If you enter a location outside of the bounds of the dataset, you will be returned either -3.40282346638529e+38 or 99999.0, which are null values, or an empty JSON. </p>
         </div>
 
@@ -36,10 +36,6 @@
   </div>
 
 
-  <footer>
-    <p>
-    Some footer
-    </p>
-  </footer>
+ {%include 'footer.html'%}
 </body>
 </html>
