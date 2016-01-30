@@ -1,0 +1,1 @@
+CREATE INDEX gist_index on rainfall.rasters using gist (ST_ConvexHull(rast));
