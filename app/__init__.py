@@ -5,10 +5,19 @@ import psycopg2.extensions
 
 app = Flask(__name__)
 app.secret_key = 'some_secret'
-conn = psycopg2.connect("dbname = 'nasatiled'")
+conn = psycopg2.connect(dbname = 'nasatiled', user = 'flask', password = 'Om16uUlzZjxI').cursor()
 cur = conn.cursor()
 
 def return_json(start_date, end_date, latitude, longitude):
+    # TODO: this query fixes a bug where we select invalid data by excluding the bounding boxes of areas
+    # with no data.
+
+    # select forecast_date from rainfall.rasters where forecast_date >= '1999-11-17' and
+    # forecast_date <= '1999-12-24' and
+    # st_intersects(rast, ST_GEOMFromtext('Point(0 0)',4326)) and
+    # not st_intersects(rast, ST_makebox2D(st_geomfromtext('Point(-180 50)'),st_geomfromtext('Point(180 90)'))) and
+    # not st_intersects(rast, ST_makebox2D(st_geomfromtext('Point(-180 -90)'),st_geomfromtext('Point(180 -50)'))) order by forecast_date;
+
     cur.execute("""SELECT forecast_date, ST_nearestvalue(rast,ST_geomfromtext('Point(%s %s)',4326)) FROM rainfall.rasters \
                 WHERE forecast_date >= %s \
                 AND forecast_date <= %s
