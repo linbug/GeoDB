@@ -1,5 +1,5 @@
 # GeoDB
-An API to query historical rainfall data.
+An API to query historical rainfall data. See the web app [here](http://162.243.55.246:5000/) (a work in progress).
 
 # Background
 This app provides API access to historical [Tropical Rainfall Monitoring Mission (TRMM)](href = 'http://pmm.nasa.gov/trmm') precipitation data. The TRMM was a joint mission between NASA and the Japan Aerospace Exploration (JAXA) Agency to study rainfall for weather and climate research. The TRMM ran from Nov 1997 to April 2015, collecting over 17 years of daily rainfall data. This database was populated with daily rainfall measurements in floating point Geotiff format at 0.25° resolution, from the [NASA Earth Observations](href='http://neo.sci.gsfc.nasa.gov/view.php?datasetId=TRMM_3B43D') (NEO) site.
@@ -21,3 +21,4 @@ If you enter a location outside of the bounds of the dataset, you will be return
 - Data scraped from [nasa](http://neo.sci.gsfc.nasa.gov/view.php?datasetId=TRMM_3B43D&date=2015-09-01), using [Selenium](http://www.seleniumhq.org/).
 - Data were then housed in a PostgreSQL with the [PostGIS extension](http://postgis.net/) enabled for location-based queries.
 - The web app was made in [Flask](http://flask.pocoo.org/)
+
