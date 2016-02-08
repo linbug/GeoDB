@@ -32,6 +32,8 @@
                     .tickValues(x.domain().filter(function(d, i) {
                         if(rainfall.length>60)
                             {return !(i%30)}
+                        else if(rainfall.length<14)
+                            {return i}
                         else
                             { return !(i % 7)}
                     }))
