@@ -26,4 +26,4 @@ If you enter a location outside of the bounds of the dataset, you will be return
 - Data scraped from [NASA NEO](http://neo.sci.gsfc.nasa.gov/view.php?datasetId=TRMM_3B43D&date=2015-09-01), using [Selenium](http://www.seleniumhq.org/).
 - Data were then housed in a PostgreSQL with the [PostGIS extension](http://postgis.net/) enabled for location-based queries.
 - The web app was made in [Flask](http://flask.pocoo.org/)
-
+- visualisations were made in [D3](https://d3js.org/)
