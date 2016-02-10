@@ -5,24 +5,24 @@ import psycopg2.extensions
 
 app = Flask(__name__)
 app.secret_key = 'some_secret'
-conn = psycopg2.connect(dbname = 'nasatiled', user = 'flask', password = 'Om16uUlzZjxI').cursor()
+conn = psycopg2.connect(dbname = 'nasatiled', user = 'Lin')
+   # user = 'flask', password = 'Om16uUlzZjxI'
+
 cur = conn.cursor()
 
 def return_json(start_date, end_date, latitude, longitude):
-    # TODO: this query fixes a bug where we select invalid data by excluding the bounding boxes of areas
-    # with no data.
 
-    # select forecast_date from rainfall.rasters where forecast_date >= '1999-11-17' and
-    # forecast_date <= '1999-12-24' and
-    # st_intersects(rast, ST_GEOMFromtext('Point(0 0)',4326)) and
-    # not st_intersects(rast, ST_makebox2D(st_geomfromtext('Point(-180 50)'),st_geomfromtext('Point(180 90)'))) and
-    # not st_intersects(rast, ST_makebox2D(st_geomfromtext('Point(-180 -90)'),st_geomfromtext('Point(180 -50)'))) order by forecast_date;
+    cur.execute("""SELECT forecast_date, ST_nearestvalue(rast,ST_geomfromtext('Point(%s %s)',4326)) \
+                    FROM rainfall.rasters \
+                    WHERE forecast_date >= %s\
+                    AND forecast_date <= %s \
+                    AND ST_intersects(rast, ST_geomfromtext('Point(%s %s)',4326)) \
+                    ORDER BY forecast_date;""",\
+                    (float(longitude), float(latitude), start_date, end_date,float(longitude), float(latitude) ))
+                    # AND NOT ST_intersects(rast, ST_makebox2D(ST_geomfromtext('Point(-180 50)'),ST_geomfromtext('Point(180 90)')))
+                    # AND NOT ST_intersects(rast, ST_makebox2D(st_geomfromtext('Point(-180 -90)'),st_geomfromtext('Point(180 -50)')))
 
-    cur.execute("""SELECT forecast_date, ST_nearestvalue(rast,ST_geomfromtext('Point(%s %s)',4326)) FROM rainfall.rasters \
-                WHERE forecast_date >= %s \
-                AND forecast_date <= %s
-                AND ST_intersects(rast, ST_geomfromtext('Point(%s %s)',4326));"""
-           , (float(longitude), float(latitude), start_date, end_date,float(longitude), float(latitude) ))
+
     rows = cur.fetchall()
     json_dict = {}
     for row in rows:
@@ -53,10 +53,6 @@ def query():
             return render_template('result.html', start_date = start_date, end_date = end_date, latitude = latitude, longitude = longitude, json_dict = json.dumps(json_dict, sort_keys=True))
     return redirect(url_for('index')) #redirects to index if GET request
 
-# @app.route('/api/start_date=<start_date>&end_date=<end_date>&latitude=<latitude>&longitude=<longitude>')
-#def return_json_page(start_date, end_date, latitude, longitude):
-#    json_dict = return_json(start_date, end_date, latitude, longitude)
-#    return json.dumps(json_dict, sort_keys=True)
 @app.route('/api/rain_dump')
 def return_json_page():
     start_date = request.args.get('start_date', '')
@@ -69,7 +65,6 @@ def return_json_page():
 
     json_dict  = return_json(start_date, end_date, latitude, longitude)
     return json.dumps(json_dict, sort_keys=True)
-    # return 'Start date = {} \n End date = {} \n Location = {}'.format(start_date, end_date, latitude)
 
 @app.route('/about')
 def about():
@@ -80,5 +75,5 @@ def not_found(error):
     return "Oops! Page not found"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port =80)
 
