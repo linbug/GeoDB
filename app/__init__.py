@@ -60,9 +60,6 @@ def return_json_page():
     latitude   = request.args.get('latitude', '')
     longitude  = request.args.get('longitude', '')
 
-    if len(start_date) == 0:
-        return "Nope"
-
     json_dict  = return_json(start_date, end_date, latitude, longitude)
     return json.dumps(json_dict, sort_keys=True)
 
