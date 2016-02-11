@@ -24,7 +24,7 @@
        <div>
            <h2> Search historic tropical rainfall data </h2>
        </div>
-
+        <div id="inputmap" class="map"></div>
        <div class = entry_box>
         <div>
                {% with messages = get_flashed_messages() %}
@@ -49,12 +49,12 @@
               <div class = form_input>
                 <p class = input_text>Latitude:</p>
                 <input type='number' step='any' name = 'latitude' min=-35 max=35 value = -22.90
-                class = input_form>
+                class = input_form id='latitude'>
               </div>
               <div class = form_input>
                 <p class = input_text >Longitude:</p>
-                <input type='number' step='any' name = 'longitude' min = -179 max =180 value = -43.17
-                class = input_form>
+                <input type='number' step='any'  name = 'longitude' min = -179 max =180 value = -43.17
+                class = input_form id='longitude'>
               </div>
 
               <div class = button_box>
@@ -70,7 +70,7 @@
     </div>
   </div>
 
-
+<script src="/static/inputmap.js"></script>
  {%include 'footer.html'%}
 </body>
 </html>
