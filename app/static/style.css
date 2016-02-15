@@ -243,7 +243,10 @@ justify-content: center;
         /*flex:1;*/
         width:300px;
         }
+#map{
 
+    width:80%;
+}
 /*********d3************/
 
 svg{
