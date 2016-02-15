@@ -22,7 +22,6 @@ def return_json(start_date, end_date, latitude, longitude):
                     # AND NOT ST_intersects(rast, ST_makebox2D(ST_geomfromtext('Point(-180 50)'),ST_geomfromtext('Point(180 90)')))
                     # AND NOT ST_intersects(rast, ST_makebox2D(st_geomfromtext('Point(-180 -90)'),st_geomfromtext('Point(180 -50)')))
 
-
     rows = cur.fetchall()
     json_dict = {}
     for row in rows:
@@ -66,6 +65,10 @@ def return_json_page():
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+@app.route('/api')
+def api():
+    return render_template('api.html')
 
 @app.errorhandler(404)
 def not_found(error):
