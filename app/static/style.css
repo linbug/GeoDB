@@ -122,6 +122,7 @@ display: -webkit-flex;
    -webkit-justify-content: center;
    justify-content: center;
    margin: 1.5% 0% 1.5% 0%;
+   width:100%;
 
 }
 .entry_box{
@@ -132,8 +133,17 @@ display: -webkit-flex;
   justify-content: center;
   align-items:center;
   flex-direction:column;
-  width:400px;
-  display:flex;
+  flex:1;
+/*  width:400px;
+*/
+  width:100%;
+display:flex;
+}
+
+#input-map-and-form-div{
+
+    display:flex;
+    flex-direction:row;
 }
 
 .form_input{
@@ -187,9 +197,9 @@ input{
   padding: 1em 0 0 0;
 }
 
-.about_para{
-
-
+#input-map-explain{
+font-size: 10px;
+text-align: center;
 }
 
 footer{
@@ -225,11 +235,13 @@ justify-content: center;
 
 /*******leaflet*********/
 
-.map { height: 20em;
-        width: 500px;
+.map { height: 330px;
+        /*width: 50%;*/
         margin:20px;
         border-radius: 5px;
         z-index: 0;
+        /*flex:1;*/
+        width:300px;
         }
 
 /*********d3************/

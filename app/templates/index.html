@@ -24,6 +24,9 @@
        <div>
            <h2> Search historic tropical rainfall data </h2>
        </div>
+        <p id='input-map-explain'> Pick a location on the map or enter your coordinates in the form below. </p>
+
+       <div id = 'input-map-and-form-div'>
         <div id="inputmap" class="map"></div>
        <div class = entry_box>
         <div>
@@ -37,6 +40,16 @@
               </div>
             <form action="/result" method="post">
               <div class = form_input>
+                <p class = input_text>Latitude:</p>
+                <input type='number' step='any' name = 'latitude' min=-35 max=35 value = -22.90 oninput="LatFunction()"
+                class = input_form id='latitude'>
+              </div>
+              <div class = form_input>
+                <p class = input_text >Longitude:</p>
+                <input type='number' step='any'  name = 'longitude' min = -179 max =180 value = -43.17
+                class = input_form id='longitude'>
+              </div>
+              <div class = form_input>
                 <p class= input_text>Start date:</p>
                 <input type='date' name = 'start_date' min='1998-01-01' max='2015-09-30'
                 class = input_form>
@@ -45,16 +58,6 @@
                 <p class = input_text>End date:</p>
                 <input type='date' name = 'end_date' min='1998-01-01' max='2015-09-30'
                 class = input_form>
-              </div>
-              <div class = form_input>
-                <p class = input_text>Latitude:</p>
-                <input type='number' step='any' name = 'latitude' min=-35 max=35 value = -22.90
-                class = input_form id='latitude'>
-              </div>
-              <div class = form_input>
-                <p class = input_text >Longitude:</p>
-                <input type='number' step='any'  name = 'longitude' min = -179 max =180 value = -43.17
-                class = input_form id='longitude'>
               </div>
 
               <div class = button_box>
@@ -66,7 +69,7 @@
         </form>
 
        </div>
-
+    </div>
     </div>
   </div>
 
