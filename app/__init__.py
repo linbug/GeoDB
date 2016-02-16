@@ -5,8 +5,7 @@ import psycopg2.extensions
 
 app = Flask(__name__)
 app.secret_key = 'some_secret'
-conn = psycopg2.connect(dbname = 'nasatiled', user = 'Lin')
-   # user = 'flask', password = 'Om16uUlzZjxI'
+conn = psycopg2.connect(dbname = 'nasatiled, user = 'flask', password = 'Om16uUlzZjxI)
 
 cur = conn.cursor()
 
@@ -75,5 +74,5 @@ def not_found(error):
     return "Oops! Page not found"
 
 if __name__ == '__main__':
-    app.run(debug=True, port =80)
+    app.run(debug=True)
 
