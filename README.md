@@ -1,4 +1,4 @@
-# Rainfall-data
+# Rainfall-data.com
 An API to query historical rainfall data. See the web app [here](http://rainfall-data.com:5000/) (a work in progress).
 
 # Background
