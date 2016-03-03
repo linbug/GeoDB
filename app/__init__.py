@@ -5,7 +5,7 @@ import psycopg2.extensions
 
 app = Flask(__name__)
 app.secret_key = 'some_secret'
-conn = psycopg2.connect(dbname = 'nasatiled, user = 'flask', password = 'Om16uUlzZjxI)
+conn = psycopg2.connect(dbname = 'nasatiled', user = 'flask', password = 'Om16uUlzZjxI')
 
 cur = conn.cursor()
 
@@ -18,8 +18,6 @@ def return_json(start_date, end_date, latitude, longitude):
                     AND ST_intersects(rast, ST_geomfromtext('Point(%s %s)',4326)) \
                     ORDER BY forecast_date;""",\
                     (float(longitude), float(latitude), start_date, end_date,float(longitude), float(latitude) ))
-                    # AND NOT ST_intersects(rast, ST_makebox2D(ST_geomfromtext('Point(-180 50)'),ST_geomfromtext('Point(180 90)')))
-                    # AND NOT ST_intersects(rast, ST_makebox2D(st_geomfromtext('Point(-180 -90)'),st_geomfromtext('Point(180 -50)')))
 
     rows = cur.fetchall()
     json_dict = {}
